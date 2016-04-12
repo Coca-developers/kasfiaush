@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">NavDrawer</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="import_item">Import</string>
+    <string name="gallery_item">Gallery</string>
+    <string name="slideshow_item">Slideshow</string>
+    <string name="tools_item">Tools</string>
+    <string name="communicate_item">Communicate</string>
+    <string name="share_item">display all products</string>
+    <string name="send_item">Create new Product</string>
+    <string name="facebook_app_id">173504259681884</string>
+    <string name="title_activity_new">NewAct</string>
+    <string name="title_activity_init_log">InitLog</string>
+    <string name="title_activity_init_login">InitLogin</string>
+</resources>
