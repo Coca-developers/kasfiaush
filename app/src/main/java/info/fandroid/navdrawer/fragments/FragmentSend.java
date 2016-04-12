@@ -1,6 +1,7 @@
 package info.fandroid.navdrawer.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,8 +31,8 @@ private String mParam1;
     EditText etPassword;
 
     private OnFragmentInteractionListener mListener;
-
-
+    private Button buttonChoose;
+    private int PICK_IMAGE_REQUEST = 1;
     public static FragmentSend newInstance(String param1, String param2) {
         FragmentSend fragment = new FragmentSend();
         Bundle args = new Bundle();
@@ -59,10 +60,22 @@ private String mParam1;
         etName = (EditText) getActivity().findViewById(R.id.etName);
         etUsername = (EditText) getActivity().findViewById(R.id.etUsername);
         etPassword = (EditText) getActivity().findViewById(R.id.etPassword);
-
+        buttonChoose = (Button) getActivity().findViewById(R.id.buttonChoose);
         bRegister = (Button) getActivity().findViewById(R.id.bRegister);
         bRegister.setOnClickListener(this);
-
+        buttonChoose.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(v == buttonChoose){
+                    showFileChooser();
+                }
+            }
+        });
+    }
+    private void showFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
     @Override
     public void onClick(View view){
