@@ -34,9 +34,7 @@ import info.fandroid.navdrawer.fragments.FragmentSlideshow;
 import info.fandroid.navdrawer.fragments.FragmentTools;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, LoginFragment.onSomeeventListener, View.OnClickListener {
-
-
+        implements NavigationView.OnNavigationItemSelectedListener,  View.OnClickListener {
 
     FragmentImport fimport;
     FragmentGallery fgallery;
@@ -47,16 +45,14 @@ public class MainActivity extends AppCompatActivity
     TextView User_name = null;
     ImageView PrifileImage = null;
     Button logoutButton = null;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,14 +61,11 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -82,47 +75,22 @@ public class MainActivity extends AppCompatActivity
         fshare = new FragmentShare();
         fshow = new FragmentSlideshow();
         ftools = new FragmentTools();
-
         View headerView = navigationView.getHeaderView(0);
          User_name = (TextView) headerView.findViewById(R.id.User_name);
         PrifileImage = (ImageView) headerView.findViewById(R.id.PrifileImage);
         logoutButton = (Button) headerView.findViewById(R.id.logout_button);
-
         logoutButton.setOnClickListener(this);
-
-        ifIsLoged();
-
+           IfIsLoged();
     }
     private void logout() {
         LoginManager.getInstance().logOut();
-
-     //   User_name.setText("");
-      //  String ht = null;
-       // Picasso.with(getApplicationContext())
-         //       .load(ht)
-         //       .into(PrifileImage);
-
         Intent i = new Intent(MainActivity.this, InitLogin.class);
-
         startActivity(i);
     }
     public boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null;
     }
-
-    public void ifIsLoged(){
-        if (isLoggedIn()) {
-
-            } else {
-
-           Intent i = new Intent(MainActivity.this, InitLogin.class);
-
-            startActivity(i);
-            }
-    }
-
-
 
     @Override
     public void onBackPressed() {
@@ -136,75 +104,62 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         FragmentTransaction ftrans = getFragmentManager().beginTransaction();
-
         if (id == R.id.nav_camara) {
             ftrans.replace(R.id.Container, fimport);
         } else if (id == R.id.nav_gallery) {
             ftrans.replace(R.id.Container, fgallery);
-
         } else if (id == R.id.nav_slideshow) {
             ftrans.replace(R.id.Container, fshow);
-
         } else if (id == R.id.nav_manage) {
             ftrans.replace(R.id.Container, ftools);
-
         } else if (id == R.id.nav_share) {
             ftrans.replace(R.id.Container, fshare);
-
         } else if (id == R.id.nav_send) {
             ftrans.replace(R.id.Container, fsend);
-
         } ftrans.commit();
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    @Override
-    public void someEvent(String a, String b) {
-        User_name.setText("aici se seteaza textul");
+    public void IfIsLoged() {
+       if (isLoggedIn()) {
+            Profile profile = Profile.getCurrentProfile();
+            String myPhoto = profile.getProfilePictureUri(400, 400).toString();
+            String getUser = profile.getName();
 
-        Picasso.with(getApplicationContext())
-                .load(b)
-                .into(PrifileImage);
-
-    }
-
-    @Override
-    public void onPlayerCancel() {
-
-    }
+            Toast.makeText(this, getUser,
+                    Toast.LENGTH_LONG).show();
+            User_name.setText(getUser);
+            Picasso.with(getApplicationContext())
+                    .load(myPhoto)
+                    .into(PrifileImage);
+        } else {
+            Intent i = new Intent(MainActivity.this, InitLogin.class);
+            startActivity(i);
+        }
+   }
 
     @Override
     public void onClick(View v) {
         logout();
     }
+
 }

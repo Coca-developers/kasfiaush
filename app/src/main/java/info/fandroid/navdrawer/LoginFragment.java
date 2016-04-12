@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +17,6 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import info.fandroid.navdrawer.fragments.FragmentImport;
 
 public class LoginFragment extends Fragment {
 
@@ -81,29 +78,14 @@ public class LoginFragment extends Fragment {
         mprofileTracker.startTracking();
     }
     public  interface onSomeeventListener{
-
         public void someEvent(String a, String b);
-          public void onPlayerCancel();
     }
     onSomeeventListener someeventListener;
-
     private void homeFragment(Profile profile) {
-
         if (profile != null) {
-
             profilePhoto = profile.getProfilePictureUri(400, 400).toString();
             String getrec = profile.getName();
-
             someeventListener.someEvent(getrec, profilePhoto);
-            someeventListener.onPlayerCancel();
-
-//            Intent i = new Intent(getActivity(), MainActivity.class);
-
-  //          startActivity(i);
-
-
-
-
         }
     }
 
@@ -114,14 +96,9 @@ public class LoginFragment extends Fragment {
         super.onAttach(activity);
         try{
             someeventListener = (onSomeeventListener) activity;
-        }catch (ClassCastException e)
-        {
-
+        }catch (ClassCastException e) {
         }
-
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.login_fragment, container, false);
