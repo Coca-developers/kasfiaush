@@ -1,19 +1,29 @@
 package info.fandroid.navdrawer.fragments;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -28,36 +38,29 @@ public class FragmentShare extends Fragment implements View.OnClickListener {
     private JSONArray user = null;
 
     private int TRACK = 0;
-    private String temp;
 
-    private EditText editTextId;
-    private EditText editTextUserName;
-    private EditText editTextPassword;
 
     Button btnPrev;
     Button btnNext;
     private static final String JSON_URL = "http://yupimedia.com/android_connect/Login.php";
-
+    LinearLayout layout;
+    ImageView iv;
+    TextView tt;
+    String anotherURL;
+   // ArrayList<InfoStuff> ci;
     private OnFragmentInteractionListener mListener;
-
-    @Override
+    LinearLayout ll;
+   @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_share, container, false);
     }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
-        editTextId = (EditText) getActivity().findViewById(R.id.editTextID);
-        editTextUserName = (EditText) getActivity().findViewById(R.id.editTextUsername);
-        editTextPassword = (EditText) getActivity().findViewById(R.id.editTextPassword);
-        btnPrev = (Button) getActivity().findViewById(R.id.buttonPrev);
-        btnNext = (Button) getActivity().findViewById(R.id.buttonNext);
-
-        btnPrev.setOnClickListener(this);
-        btnNext.setOnClickListener(this);
+         ll = (LinearLayout)getActivity().findViewById(R.id.parentL);
 
         getJSON(JSON_URL);
         //extractJSON();
@@ -135,27 +138,32 @@ public class FragmentShare extends Fragment implements View.OnClickListener {
     }
 
 
-    private void moveNext() {
-        if (TRACK < user.length()) {
-            TRACK++;
-        }
-        showData();
-    }
-
-    private void movePrev() {
-        if (TRACK > 0) {
-            TRACK--;
-        }
-        showData();
-    }
 
     private void showData() {
         try {
-            JSONObject jsonObject = user.getJSONObject(TRACK);
-
-            editTextId.setText(jsonObject.getString(ID));
-            editTextUserName.setText(jsonObject.getString(USERNAME));
-            editTextPassword.setText(jsonObject.getString(PASSWORD));
+            for( TRACK = 0; TRACK < user.length(); TRACK++) {
+                JSONObject jsonObject = user.getJSONObject(TRACK);
+                LinearLayout frL = new LinearLayout(getActivity()) ;
+                TextView name = new TextView(getActivity());
+                TextView USERn = new TextView(getActivity());
+                TextView pass = new TextView(getActivity());
+                Button readMore = new Button(getActivity());
+                readMore.setText("read more");
+                name.setId(TRACK + 10);
+                USERn.setId(TRACK + 30);
+                pass.setId(TRACK + 40);
+                frL.setId(TRACK + 20);
+                frL.setPadding(30, 30, 30, 30);
+                frL.setOrientation(LinearLayout.VERTICAL);
+                ll.addView(frL);
+                USERn.setText(jsonObject.getString(PASSWORD));
+                name.setText(jsonObject.getString(USERNAME));
+                 pass.setText(jsonObject.getString(ID));
+                frL.addView(USERn);
+                frL.addView(name);
+                frL.addView(pass);
+                frL.addView(readMore);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -164,12 +172,7 @@ public class FragmentShare extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v == btnNext) {
-            moveNext();
-        }
-        if (v == btnPrev) {
-            movePrev();
-        }
+
     }
 
 }
