@@ -33,6 +33,10 @@
             android:name=".InitLogin"
             android:label="@string/title_activity_init_login"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SingleProduct"
+            android:label="@string/title_activity_single_product"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

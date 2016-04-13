@@ -1,59 +1,49 @@
 package info.fandroid.navdrawer.fragments;
+
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.graphics.Color;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import info.fandroid.navdrawer.R;
-public class FragmentShare extends Fragment implements View.OnClickListener {
+import info.fandroid.navdrawer.SingleProduct;
+
+public class FragmentShare extends Fragment implements View.OnClickListener{
+
     private static final String JSON_ARRAY = "result";
     private static final String ID = "user_id";
     private static final String USERNAME = "name";
     private static final String PASSWORD = "username";
     private JSONArray user = null;
-
+    Button readMore;
     private int TRACK = 0;
-
-
-    Button btnPrev;
-    Button btnNext;
     private static final String JSON_URL = "http://yupimedia.com/android_connect/Login.php";
-    LinearLayout layout;
-    ImageView iv;
-    TextView tt;
-    String anotherURL;
-   // ArrayList<InfoStuff> ci;
+
     private OnFragmentInteractionListener mListener;
     LinearLayout ll;
-   @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_share, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_share, null);
+        return v;
     }
 
 
@@ -64,9 +54,8 @@ public class FragmentShare extends Fragment implements View.OnClickListener {
 
         getJSON(JSON_URL);
         //extractJSON();
-
-
     }
+
 
 
     private void getJSON(String url) {
@@ -111,8 +100,6 @@ public class FragmentShare extends Fragment implements View.OnClickListener {
                 super.onPostExecute(s);
                 loading.dismiss();
 
-
-
                 try {
                     JSONObject jsonObject = new JSONObject(s.toString());
                     user = jsonObject.getJSONArray(JSON_ARRAY);
@@ -124,7 +111,6 @@ public class FragmentShare extends Fragment implements View.OnClickListener {
         }
         GetJSON gj = new GetJSON();
         gj.execute(url);
-
     }
 
     @Override
@@ -133,12 +119,10 @@ public class FragmentShare extends Fragment implements View.OnClickListener {
         mListener = null;
     }
 
+
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(Uri uri);
     }
-
-
-
     private void showData() {
         try {
             for( TRACK = 0; TRACK < user.length(); TRACK++) {
@@ -147,12 +131,27 @@ public class FragmentShare extends Fragment implements View.OnClickListener {
                 TextView name = new TextView(getActivity());
                 TextView USERn = new TextView(getActivity());
                 TextView pass = new TextView(getActivity());
-                Button readMore = new Button(getActivity());
+                readMore = new Button(getActivity());
                 readMore.setText("read more");
                 name.setId(TRACK + 10);
                 USERn.setId(TRACK + 30);
                 pass.setId(TRACK + 40);
                 frL.setId(TRACK + 20);
+
+                 final  String nameProduct = jsonObject.getString(USERNAME);
+                final String passProduct= jsonObject.getString(PASSWORD);
+                final String IdProducT = jsonObject.getString(ID);
+                 //  readMore.setId("butonulmeu");
+                readMore.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v){
+                        Intent intent = new Intent(getActivity(), SingleProduct.class);
+                        intent.putExtra("nameProduct", nameProduct);
+                        intent.putExtra("Password", passProduct);
+                        intent.putExtra("IdProducT", IdProducT);
+                        startActivity(intent);
+                    }
+                });
                 frL.setPadding(30, 30, 30, 30);
                 frL.setOrientation(LinearLayout.VERTICAL);
                 ll.addView(frL);
@@ -169,10 +168,8 @@ public class FragmentShare extends Fragment implements View.OnClickListener {
         }
 
     }
-
     @Override
     public void onClick(View v) {
 
     }
-
 }

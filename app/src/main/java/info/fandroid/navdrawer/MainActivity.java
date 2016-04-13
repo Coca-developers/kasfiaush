@@ -162,7 +162,6 @@ public class MainActivity extends AppCompatActivity
             Profile profile = Profile.getCurrentProfile();
             String myPhoto = profile.getProfilePictureUri(400, 400).toString();
             String getUser = profile.getName();
-
             Toast.makeText(this, getUser,
                     Toast.LENGTH_LONG).show();
             User_name.setText(getUser);
