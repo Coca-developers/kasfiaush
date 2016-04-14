@@ -1,16 +1,20 @@
 package info.fandroid.navdrawer.fragments;
+
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,50 +24,38 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import info.fandroid.navdrawer.R;
-public class FragmentShare extends Fragment implements View.OnClickListener {
+import info.fandroid.navdrawer.SingleProduct;
+
+public class FragmentShare extends Fragment implements View.OnClickListener{
+
     private static final String JSON_ARRAY = "result";
     private static final String ID = "user_id";
     private static final String USERNAME = "name";
     private static final String PASSWORD = "username";
     private JSONArray user = null;
-
+    Button readMore;
     private int TRACK = 0;
-    private String temp;
-
-    private EditText editTextId;
-    private EditText editTextUserName;
-    private EditText editTextPassword;
-
-    Button btnPrev;
-    Button btnNext;
     private static final String JSON_URL = "http://yupimedia.com/android_connect/Login.php";
 
     private OnFragmentInteractionListener mListener;
-
+    LinearLayout ll;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_share, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_share, null);
+        return v;
     }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
-        editTextId = (EditText) getActivity().findViewById(R.id.editTextID);
-        editTextUserName = (EditText) getActivity().findViewById(R.id.editTextUsername);
-        editTextPassword = (EditText) getActivity().findViewById(R.id.editTextPassword);
-        btnPrev = (Button) getActivity().findViewById(R.id.buttonPrev);
-        btnNext = (Button) getActivity().findViewById(R.id.buttonNext);
-
-        btnPrev.setOnClickListener(this);
-        btnNext.setOnClickListener(this);
+         ll = (LinearLayout)getActivity().findViewById(R.id.parentL);
 
         getJSON(JSON_URL);
         //extractJSON();
-
-
     }
+
 
 
     private void getJSON(String url) {
@@ -108,8 +100,6 @@ public class FragmentShare extends Fragment implements View.OnClickListener {
                 super.onPostExecute(s);
                 loading.dismiss();
 
-
-
                 try {
                     JSONObject jsonObject = new JSONObject(s.toString());
                     user = jsonObject.getJSONArray(JSON_ARRAY);
@@ -121,7 +111,6 @@ public class FragmentShare extends Fragment implements View.OnClickListener {
         }
         GetJSON gj = new GetJSON();
         gj.execute(url);
-
     }
 
     @Override
@@ -130,46 +119,57 @@ public class FragmentShare extends Fragment implements View.OnClickListener {
         mListener = null;
     }
 
+
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(Uri uri);
     }
-
-
-    private void moveNext() {
-        if (TRACK < user.length()) {
-            TRACK++;
-        }
-        showData();
-    }
-
-    private void movePrev() {
-        if (TRACK > 0) {
-            TRACK--;
-        }
-        showData();
-    }
-
     private void showData() {
         try {
-            JSONObject jsonObject = user.getJSONObject(TRACK);
+            for( TRACK = 0; TRACK < user.length(); TRACK++) {
+                JSONObject jsonObject = user.getJSONObject(TRACK);
+                LinearLayout frL = new LinearLayout(getActivity()) ;
+                TextView name = new TextView(getActivity());
+                TextView USERn = new TextView(getActivity());
+                TextView pass = new TextView(getActivity());
+                readMore = new Button(getActivity());
+                readMore.setText("read more");
+                name.setId(TRACK + 10);
+                USERn.setId(TRACK + 30);
+                pass.setId(TRACK + 40);
+                frL.setId(TRACK + 20);
 
-            editTextId.setText(jsonObject.getString(ID));
-            editTextUserName.setText(jsonObject.getString(USERNAME));
-            editTextPassword.setText(jsonObject.getString(PASSWORD));
+                 final  String nameProduct = jsonObject.getString(USERNAME);
+                final String passProduct= jsonObject.getString(PASSWORD);
+                final String IdProducT = jsonObject.getString(ID);
+                 //  readMore.setId("butonulmeu");
+                readMore.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v){
+                        Intent intent = new Intent(getActivity(), SingleProduct.class);
+                        intent.putExtra("nameProduct", nameProduct);
+                        intent.putExtra("Password", passProduct);
+                        intent.putExtra("IdProducT", IdProducT);
+                        startActivity(intent);
+                    }
+                });
+                frL.setPadding(30, 30, 30, 30);
+                frL.setOrientation(LinearLayout.VERTICAL);
+                ll.addView(frL);
+                USERn.setText(jsonObject.getString(PASSWORD));
+                name.setText(jsonObject.getString(USERNAME));
+                 pass.setText(jsonObject.getString(ID));
+                frL.addView(USERn);
+                frL.addView(name);
+                frL.addView(pass);
+                frL.addView(readMore);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
-
     @Override
     public void onClick(View v) {
-        if (v == btnNext) {
-            moveNext();
-        }
-        if (v == btnPrev) {
-            movePrev();
-        }
-    }
 
+    }
 }

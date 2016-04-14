@@ -19,4 +19,5 @@
     <string name="title_activity_new">NewAct</string>
     <string name="title_activity_init_log">InitLog</string>
     <string name="title_activity_init_login">InitLogin</string>
+    <string name="title_activity_single_product">SingleProduct</string>
 </resources>
