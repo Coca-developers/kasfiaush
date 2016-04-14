@@ -23,7 +23,6 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
-import com.kosalgeek.android.photoutil.ImageBase64;
 import java.io.IOException;
 import android.graphics.Bitmap;
 import info.fandroid.navdrawer.R;
@@ -44,7 +43,6 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
     private Button buttonChoose;
     private int PICK_IMAGE_REQUEST = 1;
     private ImageView imageView;
-    private EditText editTextName;
     private Bitmap bitmap;
     private String KEY_IMAGE = "image";
     private String KEY_NAME = "name";
@@ -66,7 +64,6 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
         bRegister = (Button) getActivity().findViewById(R.id.bRegister);
         bRegister.setOnClickListener(this);
         imageView = (ImageView) getActivity().findViewById(R.id.imageViewP);
-        editTextName = (EditText) getActivity().findViewById(R.id.editText);
         buttonChoose.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (v == buttonChoose) {

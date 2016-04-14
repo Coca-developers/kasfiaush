@@ -74,24 +74,11 @@
     <ImageView
         android:src="@android:drawable/star_big_on"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_weight="1"
         android:id="@+id/imageViewP"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentStart="false"
         android:layout_marginBottom="56dp" />
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Upload"
-        android:id="@+id/buttonUpload"
-        android:layout_below="@+id/bRegister" />
-    <EditText
-        android:id="@+id/editText"
-        android:hint="Enter a Name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonUpload"
-        android:layout_centerHorizontal="true" />
 </RelativeLayout>
