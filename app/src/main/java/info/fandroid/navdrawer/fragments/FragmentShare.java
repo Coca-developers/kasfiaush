@@ -113,7 +113,7 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
     @Override
     public void onDetach() {
         super.onDetach();
-        //mListener = null;
+        mListener = null;
     }
 
 
