@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewOutlineProvider;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,8 +35,6 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
     Button readMore;
     private int TRACK = 0;
     private static final String JSON_URL = "http://yupimedia.com/android_connect/Login.php";
-
-    private OnFragmentInteractionListener mListener;
     LinearLayout ll;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -116,7 +113,7 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        //mListener = null;
     }
 
 
