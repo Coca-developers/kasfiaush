@@ -41,15 +41,7 @@ import info.fandroid.navdrawer.SingleProduct;
 
 
 public class FragmentShare extends Fragment implements View.OnClickListener{
-    ImageView textView5;
-    String key ="iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAIAAAC6s0uzAAAAA3NCSVQICAjb4U/gAAAgAElEQVR4" +
-            "nO3dW4xkx3nY8e+rqnO6e+57v5EiJZErUXeToihHpi1b8Q0wkgCOgSDxkxMgLxEMxAlgIEGchxiJ" +
-            "Az/YTl4SIA+OEQQIglwQRFCM2IklRxItmqFkkpZWvCyXy93lcne5Ozsz3eecqvryUNMzTXEphwmX" +
-            "RWH/v4fFcLanp2cB4j9fV506urGxIQAA4J3lar8AAADuRAQYAIAKCDAAABUQYAAAKiDAAABUQIAB" +
-            "AKiAAAMAUAEBBgCgAgIMAEAFBBgAgAoIMAAAFRBgAAAqIMAAAFRAgAEAqIAAAwBQAQEGAKACAgwA" +
-            "QAUEGACACggwAAAVEGAAACogwAAAVECAAQCogAADAFABAQYAoAICDABABQQYAIAKCDAAABUQYAAA" +
-            "KiDAAABUQIABAKiAAAMAUAEBBgCgAgIMAEAFBBgAgAoIMAAAFRBgAAAqIMAAAFRAgAEAqIAAAwBQ" +
-            "AQEGAKACAgwAQAUEGACACggwAAAVEGAAACogwAAAVECAAQCogAADAFABAQYAo";
+
     private static final String JSON_ARRAY = "result";
     private static final String ID = "user_id";
     private static final String USERNAME = "name";
@@ -74,10 +66,6 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
          ll = (LinearLayout)getActivity().findViewById(R.id.parentL);
-        textView5 = (ImageView)getActivity().findViewById(R.id.textView5);
-        Bitmap my = decodeThumbnail(key);
-        textView5.setImageBitmap(my);
-        // productImageFinal.setImageBitmap(my);
         getJSON(JSON_URL);
         //extractJSON();
     }
@@ -156,8 +144,8 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
     }
     private void showData() {
         try {
-             TRACK = 0;
-            //TRACK < user.length(); TRACK++) {
+
+             for (TRACK = 0; TRACK < user.length(); TRACK++) {
                 JSONObject jsonObject = user.getJSONObject(TRACK);
                 LinearLayout frL = new LinearLayout(getActivity()) ;
                 TextView name = new TextView(getActivity());
@@ -198,10 +186,12 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
                 frL.addView(pass);
 
 
+            Bitmap my = decodeThumbnail(encodedImage);
+            productImageFinal.setImageBitmap(my);
 
-                frL.addView(productImageFinal);
+            frL.addView(productImageFinal);
                 frL.addView(readMore);
-        //    }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

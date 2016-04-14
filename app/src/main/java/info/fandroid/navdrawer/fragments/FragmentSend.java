@@ -44,7 +44,7 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
     EditText etName;
     EditText etUsername;
     EditText etPassword;
-
+    ImageView imageView;
     private Button buttonChoose;
     private int PICK_IMAGE_REQUEST = 1;
     private EditText editTextName;
@@ -66,6 +66,7 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
         etName = (EditText) getActivity().findViewById(R.id.etName);
         etUsername = (EditText) getActivity().findViewById(R.id.etUsername);
         etPassword = (EditText) getActivity().findViewById(R.id.etPassword);
+        imageView = (ImageView) getActivity().findViewById(R.id.imageViewP);
         buttonChoose = (Button) getActivity().findViewById(R.id.buttonChoose);
         bRegister = (Button) getActivity().findViewById(R.id.bRegister);
         bRegister.setOnClickListener(this);
@@ -157,7 +158,7 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
                 //Getting the Bitmap from Gallery
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 //Setting the Bitmap to ImageView
-                //imageView.setImageBitmap(bitmap);
+                imageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
