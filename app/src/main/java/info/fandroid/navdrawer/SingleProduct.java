@@ -40,16 +40,10 @@ public class SingleProduct extends AppCompatActivity {
         String nume_product = intent.getStringExtra("nameProduct");
         String id_product = intent.getStringExtra("IdProducT");
         String Password = intent.getStringExtra("Password");
-            //efoiwejfpqdpaokdaw
+
         getUserName.setText(nume_product);
         getUserPass.setText(Password);
         getUserID.setText(id_product);
-
-
-        //sdflsdknfsdfmsdfoiafhishdoajdiasuhdfa
-        Toast.makeText(this, "sefsdok pwkerp",
-                Toast.LENGTH_LONG).show();
-
 
     }
 
