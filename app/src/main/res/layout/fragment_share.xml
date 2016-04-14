@@ -9,6 +9,13 @@
     android:weightSum="1">
 
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textView5"
+        android:layout_gravity="center_horizontal" />
 
     <ScrollView
         android:layout_width="match_parent"

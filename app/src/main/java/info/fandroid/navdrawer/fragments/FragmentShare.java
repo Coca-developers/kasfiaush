@@ -11,7 +11,9 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -26,6 +29,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -33,8 +39,17 @@ import java.net.URL;
 import info.fandroid.navdrawer.R;
 import info.fandroid.navdrawer.SingleProduct;
 
-public class FragmentShare extends Fragment implements View.OnClickListener{
 
+public class FragmentShare extends Fragment implements View.OnClickListener{
+    ImageView textView5;
+    String key ="iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAIAAAC6s0uzAAAAA3NCSVQICAjb4U/gAAAgAElEQVR4" +
+            "nO3dW4xkx3nY8e+rqnO6e+57v5EiJZErUXeToihHpi1b8Q0wkgCOgSDxkxMgLxEMxAlgIEGchxiJ" +
+            "Az/YTl4SIA+OEQQIglwQRFCM2IklRxItmqFkkpZWvCyXy93lcne5Ozsz3eecqvryUNMzTXEphwmX" +
+            "RWH/v4fFcLanp2cB4j9fV506urGxIQAA4J3lar8AAADuRAQYAIAKCDAAABUQYAAAKiDAAABUQIAB" +
+            "AKiAAAMAUAEBBgCgAgIMAEAFBBgAgAoIMAAAFRBgAAAqIMAAAFRAgAEAqIAAAwBQAQEGAKACAgwA" +
+            "QAUEGACACggwAAAVEGAAACogwAAAVECAAQCogAADAFABAQYAoAICDABABQQYAIAKCDAAABUQYAAA" +
+            "KiDAAABUQIABAKiAAAMAUAEBBgCgAgIMAEAFBBgAgAoIMAAAFRBgAAAqIMAAAFRAgAEAqIAAAwBQ" +
+            "AQEGAKACAgwAQAUEGACACggwAAAVEGAAACogwAAAVECAAQCogAADAFABAQYAo";
     private static final String JSON_ARRAY = "result";
     private static final String ID = "user_id";
     private static final String USERNAME = "name";
@@ -59,9 +74,17 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
          ll = (LinearLayout)getActivity().findViewById(R.id.parentL);
-
+        textView5 = (ImageView)getActivity().findViewById(R.id.textView5);
+        Bitmap my = decodeThumbnail(key);
+        textView5.setImageBitmap(my);
+        // productImageFinal.setImageBitmap(my);
         getJSON(JSON_URL);
         //extractJSON();
+    }
+
+    private Bitmap decodeThumbnail(String thumbData) {
+        byte[] bytes = Base64.decode(thumbData, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
 
@@ -133,7 +156,8 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
     }
     private void showData() {
         try {
-            for( TRACK = 0; TRACK < user.length(); TRACK++) {
+             TRACK = 0;
+            //TRACK < user.length(); TRACK++) {
                 JSONObject jsonObject = user.getJSONObject(TRACK);
                 LinearLayout frL = new LinearLayout(getActivity()) ;
                 TextView name = new TextView(getActivity());
@@ -149,7 +173,7 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
                 final  String nameProduct = jsonObject.getString(USERNAME);
                 final String passProduct= jsonObject.getString(PASSWORD);
                 final String IdProducT = jsonObject.getString(ID);
-                final String ProductIm =  jsonObject.getString(ProductImage);
+                final String encodedImage =  jsonObject.getString(ProductImage);
                  ImageView productImageFinal = new ImageView(getActivity());
                 //productImageFinal.setId(TRACK);
                  //  readMore.setId("butonulmeu");
@@ -173,23 +197,17 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
                 frL.addView(name);
                 frL.addView(pass);
 
-                  Bitmap FINALimg =   decodeBase64(ProductIm);
-                //productImageFinal.setText(ProductIm);
-                productImageFinal.setImageBitmap(FINALimg);
-                frL.addView(productImageFinal);
 
+
+                frL.addView(productImageFinal);
                 frL.addView(readMore);
-            }
+        //    }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
-    public static Bitmap decodeBase64(String input)
-    {
-        byte[] decodedBytes = Base64.decode(input, 0);
-        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
-    }
+
     @Override
     public void onClick(View v) {
 

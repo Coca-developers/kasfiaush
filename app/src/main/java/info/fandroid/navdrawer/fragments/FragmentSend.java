@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONObject;
 import com.android.volley.RequestQueue;
@@ -46,10 +47,10 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
 
     private Button buttonChoose;
     private int PICK_IMAGE_REQUEST = 1;
-    private ImageView imageView;
     private EditText editTextName;
     private Bitmap bitmap;
     private String KEY_IMAGE = "image";
+
 
 
     @Override
@@ -68,7 +69,7 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
         buttonChoose = (Button) getActivity().findViewById(R.id.buttonChoose);
         bRegister = (Button) getActivity().findViewById(R.id.bRegister);
         bRegister.setOnClickListener(this);
-        imageView = (ImageView) getActivity().findViewById(R.id.imageViewP);
+//        TextView = (TextView) getActivity().findViewById(R.id.imageViewP);
         editTextName = (EditText) getActivity().findViewById(R.id.editText);
         buttonChoose.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -112,14 +113,21 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
         RegisterRequest registerRequest = new RegisterRequest(name, username, age, password, image, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         queue.add(registerRequest);
+        //editTextName.setText(image);
+    //       Bitmap my = decodeThumbnail(image);
+        editTextName.setText(image);
+
     }
-    public String getStringImage(Bitmap bmp){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
+    private Bitmap decodeThumbnail(String thumbData) {
+        byte[] bytes = Base64.decode(thumbData, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
+        public String getStringImage(Bitmap bitmap) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            return Base64.encodeToString(stream.toByteArray(), Base64.DEFAULT);
+        }
+
 
             protected Map<String, String> getParams() throws AuthFailureError {
                 //Converting Bitmap to String
@@ -149,7 +157,7 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
                 //Getting the Bitmap from Gallery
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 //Setting the Bitmap to ImageView
-                imageView.setImageBitmap(bitmap);
+                //imageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
