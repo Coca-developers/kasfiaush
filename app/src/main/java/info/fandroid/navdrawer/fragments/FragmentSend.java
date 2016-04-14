@@ -83,6 +83,7 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
         final int age = Integer.parseInt(etAge.getText().toString());
         final String password = etPassword.getText().toString();
         final String image = getStringImage(bitmap);
+
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -105,7 +106,7 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
             }
         };
 
-        RegisterRequest registerRequest = new RegisterRequest(name, username, age, image,password, responseListener);
+        RegisterRequest registerRequest = new RegisterRequest(name, username, age, password, image, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         queue.add(registerRequest);
     }
@@ -120,18 +121,8 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
             protected Map<String, String> getParams() throws AuthFailureError {
                 //Converting Bitmap to String
                 String image = getStringImage(bitmap);
-
-                //Getting Image Name
-                String name = editTextName.getText().toString().trim();
-
-                //Creating parameters
                 Map<String,String> params = new Hashtable<String, String>();
-
-                //Adding parameters
                 params.put(KEY_IMAGE, image);
-                params.put(KEY_NAME, name);
-
-                //returning parameters
                 return params;
             }
 
