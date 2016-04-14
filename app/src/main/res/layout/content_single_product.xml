@@ -59,12 +59,12 @@
         android:layout_alignEnd="@+id/getUserName" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
-        android:id="@+id/getUserID"
-        android:layout_alignTop="@+id/textView4"
-        android:layout_alignEnd="@+id/getUserPass"
-        android:layout_alignBottom="@+id/textView4" />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text=""
+    android:id="@+id/getUserID"
+    android:layout_alignTop="@+id/textView4"
+    android:layout_alignEnd="@+id/getUserPass"
+    android:layout_alignBottom="@+id/textView4" />
 </RelativeLayout>

@@ -3,6 +3,7 @@ package info.fandroid.navdrawer.fragments;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -24,6 +25,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import com.kosalgeek.android.photoutil.ImageBase64;
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import android.graphics.Bitmap;
 import info.fandroid.navdrawer.R;
@@ -47,7 +50,7 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
     private EditText editTextName;
     private Bitmap bitmap;
     private String KEY_IMAGE = "image";
-    private String KEY_NAME = "name";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

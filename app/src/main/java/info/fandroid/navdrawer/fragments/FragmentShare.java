@@ -5,15 +5,23 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +39,7 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
     private static final String ID = "user_id";
     private static final String USERNAME = "name";
     private static final String PASSWORD = "username";
+    private static final String ProductImage = "image";
     private JSONArray user = null;
     Button readMore;
     private int TRACK = 0;
@@ -137,13 +146,16 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
                 pass.setId(TRACK + 40);
                 frL.setId(TRACK + 20);
 
-                 final  String nameProduct = jsonObject.getString(USERNAME);
+                final  String nameProduct = jsonObject.getString(USERNAME);
                 final String passProduct= jsonObject.getString(PASSWORD);
                 final String IdProducT = jsonObject.getString(ID);
+                final String ProductIm =  jsonObject.getString(ProductImage);
+                 ImageView productImageFinal = new ImageView(getActivity());
+                //productImageFinal.setId(TRACK);
                  //  readMore.setId("butonulmeu");
                 readMore.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
+                    public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), SingleProduct.class);
                         intent.putExtra("nameProduct", nameProduct);
                         intent.putExtra("Password", passProduct);
@@ -160,12 +172,23 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
                 frL.addView(USERn);
                 frL.addView(name);
                 frL.addView(pass);
+
+                  Bitmap FINALimg =   decodeBase64(ProductIm);
+                //productImageFinal.setText(ProductIm);
+                productImageFinal.setImageBitmap(FINALimg);
+                frL.addView(productImageFinal);
+
                 frL.addView(readMore);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+    }
+    public static Bitmap decodeBase64(String input)
+    {
+        byte[] decodedBytes = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
     @Override
     public void onClick(View v) {
