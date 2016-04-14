@@ -36,6 +36,8 @@ public class FragmentShare extends Fragment implements View.OnClickListener{
     private int TRACK = 0;
     private static final String JSON_URL = "http://yupimedia.com/android_connect/Login.php";
     LinearLayout ll;
+
+    private OnFragmentInteractionListener mListener;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

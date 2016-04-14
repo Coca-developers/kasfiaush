@@ -45,6 +45,8 @@ public class SingleProduct extends AppCompatActivity {
         getUserPass.setText(Password);
         getUserID.setText(id_product);
 
+
+        //sdflsdknfsdfmsdfoiafhishdoajdiasuhdfa
         Toast.makeText(this, "sefsdok pwkerp",
                 Toast.LENGTH_LONG).show();
 
