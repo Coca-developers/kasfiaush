@@ -25,6 +25,8 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
+
+import com.facebook.Profile;
 import com.kosalgeek.android.photoutil.ImageBase64;
 import com.squareup.picasso.Picasso;
 
@@ -44,12 +46,12 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
     EditText etName;
     EditText etUsername;
     EditText etPassword;
-    ImageView imageView;
+    ImageView imageViewP;
     private Button buttonChoose;
     private int PICK_IMAGE_REQUEST = 1;
-    private EditText editTextName;
     private Bitmap bitmap;
     private String KEY_IMAGE = "image";
+
 
 
 
@@ -66,12 +68,12 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
         etName = (EditText) getActivity().findViewById(R.id.etName);
         etUsername = (EditText) getActivity().findViewById(R.id.etUsername);
         etPassword = (EditText) getActivity().findViewById(R.id.etPassword);
-        imageView = (ImageView) getActivity().findViewById(R.id.imageViewP);
+        imageViewP = (ImageView) getActivity().findViewById(R.id.imageViewP);
         buttonChoose = (Button) getActivity().findViewById(R.id.buttonChoose);
         bRegister = (Button) getActivity().findViewById(R.id.bRegister);
         bRegister.setOnClickListener(this);
 //        TextView = (TextView) getActivity().findViewById(R.id.imageViewP);
-        editTextName = (EditText) getActivity().findViewById(R.id.editText);
+        //editTextName = (EditText) getActivity().findViewById(R.id.editText);
         buttonChoose.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (v == buttonChoose) {
@@ -110,19 +112,15 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
                 }
             }
         };
+        Profile profile = Profile.getCurrentProfile();
+        String CurrentUser = profile.getId();
 
-        RegisterRequest registerRequest = new RegisterRequest(name, username, age, password, image, responseListener);
+        RegisterRequest registerRequest = new RegisterRequest(name, username, age, password, image, CurrentUser, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         queue.add(registerRequest);
-        //editTextName.setText(image);
-    //       Bitmap my = decodeThumbnail(image);
-        editTextName.setText(image);
 
     }
-    private Bitmap decodeThumbnail(String thumbData) {
-        byte[] bytes = Base64.decode(thumbData, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-    }
+
         public String getStringImage(Bitmap bitmap) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -158,7 +156,7 @@ public class FragmentSend extends Fragment implements  View.OnClickListener{
                 //Getting the Bitmap from Gallery
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 //Setting the Bitmap to ImageView
-                imageView.setImageBitmap(bitmap);
+                imageViewP.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -11,7 +11,7 @@
     <string name="import_item">Import</string>
     <string name="gallery_item">Gallery</string>
     <string name="slideshow_item">Slideshow</string>
-    <string name="tools_item">Tools</string>
+    <string name="tools_item">MyProducts</string>
     <string name="communicate_item">Communicate</string>
     <string name="share_item">display all products</string>
     <string name="send_item">Create new Product</string>
@@ -20,4 +20,5 @@
     <string name="title_activity_init_log">InitLog</string>
     <string name="title_activity_init_login">InitLogin</string>
     <string name="title_activity_single_product">SingleProduct</string>
+    <string name="title_activity_edit_product">EditProduct</string>
 </resources>

@@ -162,8 +162,8 @@ public class MainActivity extends AppCompatActivity
             Profile profile = Profile.getCurrentProfile();
             String myPhoto = profile.getProfilePictureUri(400, 400).toString();
             String getUser = profile.getName();
-            Toast.makeText(this, getUser,
-                    Toast.LENGTH_LONG).show();
+          // String CurentUser = profile.getId();
+
             User_name.setText(getUser);
             Picasso.with(getApplicationContext())
                     .load(myPhoto)
