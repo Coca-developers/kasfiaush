@@ -14,13 +14,14 @@ public class RegisterEditProduct extends StringRequest {
     private static final String REGISTER_REQUEST_URL = "http://itiscriu.eu/update_product.php";
     private Map<String, String> params;
 
-    public RegisterEditProduct(String name, String username, int age, String password, String image, String id_product ,  Response.Listener<String> listener) {
+    public RegisterEditProduct(String name, String CurrentUser , String Pdescript, String PAge, String PProducer, String image, String id_product ,  Response.Listener<String> listener) {
         super(Method.POST, REGISTER_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("name", name);
-        params.put("username", username);
-        params.put("age", age+"");
-        params.put("password", password);
+        params.put("CurrentUser", CurrentUser);
+        params.put("description", Pdescript);
+        params.put("age", PAge);
+        params.put("producer", PProducer);
         params.put("CurentImage", image);
         params.put("id_product", id_product);
     }

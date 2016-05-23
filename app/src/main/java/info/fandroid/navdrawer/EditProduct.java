@@ -21,6 +21,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.facebook.Profile;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,9 +33,9 @@ import java.util.Map;
 
 public class EditProduct extends AppCompatActivity implements View.OnClickListener {
     EditText editName;
-    EditText editUsername;
-    EditText editPass;
-    EditText editAge;
+    EditText editProducator;
+    EditText editAnul;
+    EditText editDescrierea;
     ImageView ViewImageCurent;
     Button buttonRegister;
     private Button buttonChoose;
@@ -43,9 +44,12 @@ public class EditProduct extends AppCompatActivity implements View.OnClickListen
     private String KEY_IMAGE = "image";
     String nume_product;
     String id_product;
-    String Password;
+    String producer;
     String CurentImage;
     String image;
+    String anulProducerii;
+
+    String descriptionProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +58,9 @@ public class EditProduct extends AppCompatActivity implements View.OnClickListen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         editName = (EditText) findViewById(R.id.editName);
-        editUsername = (EditText) findViewById(R.id.editUsername);
-        editPass = (EditText) findViewById(R.id.editPass);
-        editAge = (EditText) findViewById(R.id.editAge);
+        editProducator = (EditText) findViewById(R.id.editProducator);
+        editAnul = (EditText) findViewById(R.id.editAnul);
+        editDescrierea = (EditText) findViewById(R.id.editDescrierea);
         ViewImageCurent = (ImageView)findViewById(R.id.ViewImageCurent);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         buttonChoose = (Button) findViewById(R.id.EditImage);
@@ -69,16 +73,32 @@ public class EditProduct extends AppCompatActivity implements View.OnClickListen
         });
 
         Intent intent = getIntent();
+/*
+        Intent intent = new Intent(getActivity(), EditProduct.class);
+        intent.putExtra("nameProduct", nameProduct);
+        intent.putExtra("descriptionProduct", ProductDescription);
+        intent.putExtra("producer", Producer);
+        intent.putExtra("IdProducT", IdProducT);
+        intent.putExtra("DataAdaugarii", AddedAtT);
+        intent.putExtra("anulProducerii", ProductYearT);
+
+        intent.putExtra("ImageCurent", encodedImage);*/
 
          nume_product = intent.getStringExtra("nameProduct");
-          id_product = intent.getStringExtra("IdProducT");
-         Password = intent.getStringExtra("Password");
+        id_product = intent.getStringExtra("IdProducT");
+        producer = intent.getStringExtra("producer");
           CurentImage = intent.getStringExtra("ImageCurent");
+        anulProducerii = intent.getStringExtra("anulProducerii");
+        descriptionProduct = intent.getStringExtra("descriptionProduct");
         Bitmap productImage = decodeThumbnail(CurentImage);
+
+
+
         ViewImageCurent.setImageBitmap(productImage);
         editName.setText(nume_product);
-        editPass.setText(Password);
-
+        editAnul.setText(anulProducerii);
+        editProducator.setText(producer);
+        editDescrierea.setText(descriptionProduct);
 
 
 
@@ -96,10 +116,10 @@ public class EditProduct extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v){
 
-        final String name = editName.getText().toString();
-        final String username = editUsername.getText().toString();
-        final int age = Integer.parseInt(editAge.getText().toString());
-        final String password = editPass.getText().toString();
+        final String Pname = editName.getText().toString();
+        final String Pdescript = editDescrierea.getText().toString();
+        final String PAge = editAnul.getText().toString();
+        final String PProducer = editProducator.getText().toString();
         //final String image = getStringImage(bitmap);
 
         Response.Listener<String> responseEdit = new Response.Listener<String>() {
@@ -131,8 +151,9 @@ public class EditProduct extends AppCompatActivity implements View.OnClickListen
             image = CurentImage;
         }
         //final String image = getStringImage(bitmap);
-
-        RegisterEditProduct registerEditProduct = new RegisterEditProduct(name, username, age, password, image, id_product,  responseEdit);
+        Profile profile = Profile.getCurrentProfile();
+        String CurrentUser = profile.getId();
+        RegisterEditProduct registerEditProduct = new RegisterEditProduct(Pname, CurrentUser, Pdescript, PAge, PProducer, image, id_product,  responseEdit);
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         queue.add(registerEditProduct);
 

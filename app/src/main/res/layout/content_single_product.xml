@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="username"
+                android:text="numele produsului"
                 android:id="@+id/textView2"
                 />
             <TextView
@@ -63,9 +63,9 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="user id"
+                android:text="description"
                 android:id="@+id/textView4"
-                 />
+                android:layout_weight="0.08" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -78,6 +78,7 @@
             />
 
     </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -88,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="password"
+            android:text="anul producerii"
             android:id="@+id/textView3"
             />
 
@@ -102,6 +103,60 @@
             android:id="@+id/getUserPass"
             />
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        >
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Producator:"
+            android:id="@+id/textView8998"
+            android:layout_weight="0.08" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text=""
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/ProducerView"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="1"
+    >
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="adaugat la:"
+        android:id="@+id/textView89"
+        android:layout_weight="0.08" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/addedAt"
+        />
+
+</LinearLayout>
 
 
         <ImageView

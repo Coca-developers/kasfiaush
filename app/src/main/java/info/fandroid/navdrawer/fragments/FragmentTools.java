@@ -27,6 +27,8 @@ import com.facebook.Profile;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import info.fandroid.navdrawer.DeleteProduct;
 import info.fandroid.navdrawer.EditProduct;
 import info.fandroid.navdrawer.R;
@@ -34,11 +36,16 @@ import info.fandroid.navdrawer.RegisterRequestN;
 import info.fandroid.navdrawer.SingleProduct;
 
 public class FragmentTools extends Fragment {
+
     private static final String JSON_ARRAY = "result";
-    private static final String ID = "user_id";
-    private static final String USERNAME = "name";
-    private static final String PASSWORD = "username";
+    private static final String ID = "product_id";
+    private static final String ProductName = "ProductName";
+    private static final String DESCRIPTION = "description";
+    private static final String PRODUCER = "producatorul";
     private static final String ProductImage = "image";
+    private static final String ProductYear = "anulProducerii";
+    private static final String AddedAt = "AddedAt";
+
     private JSONArray user = null;
     private int TRACK = 0;
     LinearLayout ParentLayout;
@@ -87,30 +94,42 @@ public class FragmentTools extends Fragment {
                 JSONObject jsonObject = user.getJSONObject(TRACK);
               final  LinearLayout frL = new LinearLayout(getActivity()) ;
                 TextView name = new TextView(getActivity());
-                TextView USERn = new TextView(getActivity());
-                TextView pass = new TextView(getActivity());
+                TextView despript = new TextView(getActivity());
+                TextView producer = new TextView(getActivity());
+                TextView  productYearV = new TextView(getActivity());
+                TextView  addedAtV = new TextView(getActivity());
+
                 Button  delleteProduct = new Button(getActivity());
                 Button EditThisProduct = new Button(getActivity());
                 delleteProduct.setText("delete this item");
                 EditThisProduct.setText("edit this item");
                 name.setId(TRACK + 10);
-                USERn.setId(TRACK + 30);
-                pass.setId(TRACK + 40);
+                despript.setId(TRACK + 30);
+                producer.setId(TRACK + 40);
                 frL.setId(TRACK);
 
-                final  String nameProduct = jsonObject.getString(USERNAME);
-                final String passProduct= jsonObject.getString(PASSWORD);
+                final  String nameProduct = jsonObject.getString(ProductName);
+                final String ProductDescription= jsonObject.getString(DESCRIPTION);
                 final String IdProducT = jsonObject.getString(ID);
+                final String Producer = jsonObject.getString(PRODUCER);
                 final String encodedImage =  jsonObject.getString(ProductImage);
+                final String ProductYearT = jsonObject.getString(ProductYear);
+                final String AddedAtT =jsonObject.getString(AddedAt);
+
                 ImageView productImageFinal = new ImageView(getActivity());
                 EditThisProduct.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
                         Intent intent = new Intent(getActivity(), EditProduct.class);
                         intent.putExtra("nameProduct", nameProduct);
-                        intent.putExtra("Password", passProduct);
+                        intent.putExtra("descriptionProduct", ProductDescription);
+                        intent.putExtra("producer", Producer);
                         intent.putExtra("IdProducT", IdProducT);
+                        intent.putExtra("DataAdaugarii", AddedAtT);
+                        intent.putExtra("anulProducerii", ProductYearT);
+
                         intent.putExtra("ImageCurent", encodedImage);
+
                         startActivity(intent);
                     }
 
@@ -146,24 +165,29 @@ public class FragmentTools extends Fragment {
                                 DeleteProduct deleteProduct = new DeleteProduct(IdProducT, responseDelete);
                                 RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
                                 queue.add(deleteProduct);
-                            } });
+                            }
+                        });
                         alertDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Context context = getActivity().getApplicationContext();
-                                Toast.makeText(context, "canceled" , Toast.LENGTH_SHORT).show();
-                            } });
+                                Toast.makeText(context, "canceled", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         alertDialog.show();
                     }
                 });
                 frL.setPadding(30, 30, 30, 30);
                 frL.setOrientation(LinearLayout.VERTICAL);
                 ParentLayout.addView(frL);
-                USERn.setText(jsonObject.getString(PASSWORD));
-                name.setText(jsonObject.getString(USERNAME));
-                pass.setText(jsonObject.getString(ID));
-                frL.addView(USERn);
+                despript.setText(jsonObject.getString(DESCRIPTION));
+                name.setText(jsonObject.getString(ProductName));
+                producer.setText(Producer);
+                productYearV.setText(ProductYearT);
+                addedAtV.setText(AddedAtT);
                 frL.addView(name);
-                frL.addView(pass);
+                frL.addView(despript);
+                frL.addView(producer);
+                frL.addView(addedAtV);
                 Bitmap my = decodeThumbnail(encodedImage);
                 productImageFinal.setImageBitmap(my);
                 frL.addView(productImageFinal);

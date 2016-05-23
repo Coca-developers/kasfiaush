@@ -27,8 +27,6 @@ import com.squareup.picasso.Picasso;
 
 import info.fandroid.navdrawer.fragments.FragmentGallery;
 import info.fandroid.navdrawer.fragments.FragmentImport;
-import info.fandroid.navdrawer.fragments.FragmentSend;
-import info.fandroid.navdrawer.fragments.FragmentShare;
 import info.fandroid.navdrawer.fragments.FragmentSlideshow;
 import info.fandroid.navdrawer.fragments.FragmentTools;
 
@@ -37,8 +35,6 @@ public class MainActivity extends AppCompatActivity
 
     FragmentImport fimport;
     FragmentGallery fgallery;
-    FragmentSend fsend;
-    FragmentShare fshare;
     FragmentSlideshow fshow;
     FragmentTools ftools;
     TextView User_name = null;
@@ -70,8 +66,6 @@ public class MainActivity extends AppCompatActivity
 
         fgallery = new FragmentGallery();
         fimport = new FragmentImport();
-        fsend = new FragmentSend();
-        fshare = new FragmentShare();
         fshow = new FragmentSlideshow();
         ftools = new FragmentTools();
         View headerView = navigationView.getHeaderView(0);
@@ -139,12 +133,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_manage :
                 ftrans.replace(R.id.Container, ftools);
-                break;
-            case R.id.nav_share :
-                ftrans.replace(R.id.Container, fshare);
-                break;
-            case R.id.nav_send :
-                ftrans.replace(R.id.Container, fsend);
                 break;
             case R.id.nav_slideshow :
                 ftrans.replace(R.id.Container, fshow);

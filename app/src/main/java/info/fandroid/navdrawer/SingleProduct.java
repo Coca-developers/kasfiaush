@@ -44,7 +44,7 @@ public class SingleProduct extends AppCompatActivity implements View.OnClickList
     GoogleMap googleMap;
     TextView getUserName;
     TextView getUserPass;
-    TextView getUserID;
+    TextView getProductYear;
     ImageView SingePrImage;
     private JSONArray locations = null;
     private static final String LAT = "lat";
@@ -57,10 +57,12 @@ public class SingleProduct extends AppCompatActivity implements View.OnClickList
     TextView ratethreeStars;
     TextView rateFourStars;
     TextView rateFiveStars;
-    String id_product;
+    String YearProduct;
     TextView totalVotes;
+    String IdProducT;
     TextView totalRate;
-
+    TextView addedAt;
+    TextView ProducerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,19 +81,39 @@ public class SingleProduct extends AppCompatActivity implements View.OnClickList
         });
         getUserName = (TextView) findViewById(R.id.getUserName);
         getUserPass = (TextView) findViewById(R.id.getUserPass);
-        getUserID = (TextView) findViewById(R.id.getUserID);
+        getProductYear = (TextView) findViewById(R.id.getUserID);
         SingePrImage = (ImageView) findViewById(R.id.SingePrImage);
+        addedAt = (TextView) findViewById(R.id.addedAt);
+        ProducerView = (TextView) findViewById(R.id.ProducerView); ;
+
+
         Intent intent = getIntent();
+
+
+        /*
+          intent.putExtra("nameProduct", nameProduct);
+                        intent.putExtra("descriptionProduct", descriptionProduct);
+                        intent.putExtra("producer", producer);
+                        intent.putExtra("IdProducT", IdProducT);
+                        intent.putExtra("DataAdaugarii", DataAdaugarii);
+                        intent.putExtra("anulProducerii", anulProducerii);
+
+         */
+        String Producer = intent.getStringExtra("producer");
+         String dataadaugarii = intent.getStringExtra("DataAdaugarii");
+        IdProducT = intent.getStringExtra("IdProducT");
         String nume_product = intent.getStringExtra("nameProduct");
-        id_product = intent.getStringExtra("IdProducT");
-        String Password = intent.getStringExtra("Password");
+        YearProduct = intent.getStringExtra("anulProducerii");
+        String ProductDesc = intent.getStringExtra("descriptionProduct");
         String CurentImage = intent.getStringExtra("ImageCurent");
+        addedAt.setText(dataadaugarii);
+        ProducerView.setText(Producer);
 
         Bitmap my = decodeThumbnail(CurentImage);
         SingePrImage.setImageBitmap(my);
         getUserName.setText(nume_product);
-        getUserPass.setText(Password);
-        getUserID.setText(id_product);
+        getUserPass.setText(ProductDesc);
+        getProductYear.setText(YearProduct);
         createMapView();
 
         //addMarker();
@@ -120,7 +142,7 @@ public class SingleProduct extends AppCompatActivity implements View.OnClickList
             }
         };
 
-        ProductLocations productLocations = new ProductLocations(id_product, getLocations);
+        ProductLocations productLocations = new ProductLocations(IdProducT, getLocations);
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(productLocations);
 
@@ -155,7 +177,7 @@ public class SingleProduct extends AppCompatActivity implements View.OnClickList
             }
         };
 
-        GetProductRating getProductRating = new GetProductRating(id_product, responseProductRating);
+        GetProductRating getProductRating = new GetProductRating(IdProducT, responseProductRating);
         RequestQueue queuety = Volley.newRequestQueue(this);
         queuety.add(getProductRating);
 
@@ -259,7 +281,7 @@ public class SingleProduct extends AppCompatActivity implements View.OnClickList
 
     public void vote(int gr){
 
-        RateThisProduct rateOne = new RateThisProduct(user_id ,id_product, gr,  VotingR);
+        RateThisProduct rateOne = new RateThisProduct(user_id ,IdProducT, gr,  VotingR);
         RequestQueue queue5 = Volley.newRequestQueue(this);
         queue5.add(rateOne);
 
