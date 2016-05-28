@@ -76,7 +76,7 @@ public class FragmentTools extends Fragment {
             }
         };
         Profile profile = Profile.getCurrentProfile();
-        String customID = profile.getId();
+        String customID = profile.getName();
         RegisterRequestN registerRequest = new RegisterRequestN(customID, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         queue.add(registerRequest);

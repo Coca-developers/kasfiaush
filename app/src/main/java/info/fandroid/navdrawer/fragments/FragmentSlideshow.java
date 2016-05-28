@@ -113,7 +113,8 @@ public class FragmentSlideshow extends Fragment implements  View.OnClickListener
             }
         };
         Profile profile = Profile.getCurrentProfile();
-        String CurrentUser = profile.getId();
+        String CurrentUser = profile.getName();
+       // String getUser = profile.getName();
 
         RegisterRequest registerRequest = new RegisterRequest(name, producer, description, ProducYear, image, CurrentUser, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());

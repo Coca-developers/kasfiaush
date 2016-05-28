@@ -277,7 +277,7 @@ public class SingleProduct extends AppCompatActivity implements View.OnClickList
 
     };
     Profile profile = Profile.getCurrentProfile();
-    String user_id = profile.getId();
+    String user_id = profile.getName();
 
     public void vote(int gr){
 

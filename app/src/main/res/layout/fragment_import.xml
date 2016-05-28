@@ -6,5 +6,17 @@
     android:weightSum="100"
     tools:context="info.fandroid.navdrawer.fragments.FragmentImport">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:weightSum="1"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/parentL"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
 
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

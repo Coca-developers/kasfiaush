@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity
     public void IfIsLoged() {
        if (isLoggedIn()) {
             Profile profile = Profile.getCurrentProfile();
+
             String myPhoto = profile.getProfilePictureUri(400, 400).toString();
             String getUser = profile.getName();
           // String CurentUser = profile.getId();

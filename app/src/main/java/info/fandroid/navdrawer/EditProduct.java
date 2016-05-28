@@ -152,7 +152,7 @@ public class EditProduct extends AppCompatActivity implements View.OnClickListen
         }
         //final String image = getStringImage(bitmap);
         Profile profile = Profile.getCurrentProfile();
-        String CurrentUser = profile.getId();
+        String CurrentUser = profile.getName();
         RegisterEditProduct registerEditProduct = new RegisterEditProduct(Pname, CurrentUser, Pdescript, PAge, PProducer, image, id_product,  responseEdit);
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         queue.add(registerEditProduct);
