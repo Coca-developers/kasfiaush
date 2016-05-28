@@ -42,27 +42,22 @@ import java.net.URL;
 import info.fandroid.navdrawer.R;
 import info.fandroid.navdrawer.RegisterRequest;
 import info.fandroid.navdrawer.SingleProduct;
-import info.fandroid.navdrawer.getProductById;
 
 //import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class FragmentImport extends Fragment implements View.OnClickListener{
 
-        private static final String JSON_ARRAY = "result";
-        private static final String ID = "product_id";
+       private static final String JSON_ARRAY = "result";
         private static final String ProductName = "name";
         private static final String DESCRIPTION = "description";
         private static final String PRODUCER = "producatorul";
-        private static final String ProductImage = "image";
-        private static final String ProductYear = "anulProducerii";
-        private static final String AddedAt = "AddedAt";
+        private static final String ProductImage = "ProductImage";
+        private static final String ProductYear = "ProducYear";
         private JSONArray user = null;
-
-        private static final String activityId = "activityId";
-        private static final String productId = "productId";
-        private static final String userId = "userId";
-        private static final String DAte="DAte";
-        private static final String activityType= "activityType";
+        private static final String productId = "product_id";
+        private static final String userId = "CurrentUser";
+        private static final String DAte="CurentTime";
+        private static final String activityType= "ActivitiType";
 
         Button readMore;
         private int TRACK = 0;
@@ -82,6 +77,7 @@ public class FragmentImport extends Fragment implements View.OnClickListener{
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
             ll = (LinearLayout)getActivity().findViewById(R.id.parentL);
+
 
             getJSON(JSON_URL);
             //extractJSON();
@@ -160,60 +156,46 @@ public class FragmentImport extends Fragment implements View.OnClickListener{
         public interface OnFragmentInteractionListener {
             public void onFragmentInteraction(Uri uri);
         }
-        private void showData() {
+    private void showData() {
             try {
-
 
                 for (TRACK = 0; TRACK < user.length(); TRACK++) {
                     JSONObject jsonObject = user.getJSONObject(TRACK);
-                    LinearLayout frL = new LinearLayout(getActivity()) ;
+                    LinearLayout linearLayout = new LinearLayout(getActivity()) ;
                     TextView name = new TextView(getActivity());
                     TextView Producator = new TextView(getActivity());
                     TextView year = new TextView(getActivity());
+                    final TextView productName = new TextView(getActivity());
                     readMore = new Button(getActivity());
                     readMore.setText("read more");
-                    name.setId(TRACK + 10);
-                    Producator.setId(TRACK + 30);
-                    year.setId(TRACK + 40);
-                    frL.setId(TRACK + 20);
+                    TextView curentActivity = new TextView(getActivity());
 
-
-
-                    final String ActivityId = jsonObject.getString(activityId);
-                    final String ProductId = jsonObject.getString(productId);
+                    final String lastActivity;
                     final String UserId = jsonObject.getString(userId);
-                    final String ActivityType= jsonObject.getString(activityType);
+                    final String ActivityType = jsonObject.getString(activityType);
                     final  String Date = jsonObject.getString(DAte);
+                    final String PName = jsonObject.getString(ProductName);
+                    productName.setText(PName);
+                    //DESCRIPTION PRODUCER ProductImage ProductYear
+                    switch (ActivityType) {
+                        case "hasNoted":
+                            curentActivity.setText(" a apreciat produsul ");
+                            break;
+                        case "EditProduct":
+                            curentActivity.setText(" a modificat produsul ");
+                            break;
+                        case "addNewProduct":
 
+                            curentActivity.setText(" a adaugat produsul ");
+                            break;
+                        default:
+                            break;
+                    }
 
-                    Response.Listener<String> responseListener = new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONObject jsonResponse = new JSONObject(response);
-                                boolean success = jsonResponse.getBoolean("success");
-                                if (success) {
-                                    Toast.makeText(getActivity(), "succes!",
-                                            Toast.LENGTH_LONG).show();
-
-                                } else {
-
-                                    Toast.makeText(getActivity(), "an error has occured!",
-                                            Toast.LENGTH_LONG).show();
-
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    };
                     Profile profile = Profile.getCurrentProfile();
                     String CurrentUser = profile.getName();
                     // String getUser = profile.getName();
 
-                    getProductById getCurrentProduct = new RegisterRequest(ProductId, responseListener);
-                    RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-                    queue.add(getCurrentProduct);
 
                     /*final  String nameProduct = jsonObject.getString(ProductName);
                     final String descriptionProduct= jsonObject.getString(DESCRIPTION);
@@ -244,22 +226,25 @@ public class FragmentImport extends Fragment implements View.OnClickListener{
                             startActivity(intent);*/
                         }
                     });
-                    frL.setPadding(30, 30, 30, 30);
-                    frL.setOrientation(LinearLayout.VERTICAL);
-                    ll.addView(frL);
-                    Producator.setText(UserId);
-                    name.setText(ActivityType);
-                    year.setText(Date);
-                    frL.addView(name);
-                    frL.addView(Producator);
-                    frL.addView(year);
+                    linearLayout.setPadding(30, 30, 30, 30);
+                    linearLayout.setOrientation(LinearLayout.VERTICAL);
+                    ll.addView(linearLayout);
+                    //Producator.setText(UserId);
+                    name.setText(UserId);
+
+                    //year.setText(Date);
+                    linearLayout.addView(name);
+                    //linearLayout.addView(Producator);
+                    linearLayout.addView(curentActivity);
+
+                    linearLayout.addView(productName);
 
 
                     //Bitmap my = decodeThumbnail(encodedImage);
                    // productImageFinal.setImageBitmap(my);
 
                    // frL.addView(productImageFinal);
-                    frL.addView(readMore);
+                    linearLayout.addView(readMore);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

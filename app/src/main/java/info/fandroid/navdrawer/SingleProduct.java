@@ -112,8 +112,8 @@ public class SingleProduct extends AppCompatActivity implements View.OnClickList
         Bitmap my = decodeThumbnail(CurentImage);
         SingePrImage.setImageBitmap(my);
         getUserName.setText(nume_product);
-        getUserPass.setText(ProductDesc);
-        getProductYear.setText(YearProduct);
+        getUserPass.setText(YearProduct);
+        getProductYear.setText(ProductDesc);
         createMapView();
 
         //addMarker();

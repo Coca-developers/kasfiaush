@@ -13,304 +13,342 @@
     android:paddingTop="55dp"
     >
 
-<RelativeLayout
-    android:orientation="horizontal"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
 
 
-    >
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/mainContainer"
-    android:gravity="start"
-    android:orientation="vertical"
-    android:weightSum="1">
+        >
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1"
-            >
-            <TextView
-                android:layout_width="wrap_content"
+            android:id="@+id/mainContainer"
+            android:gravity="start"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="numele produsului"
-                android:id="@+id/textView2"
+                android:weightSum="1"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text=""
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/getUserName"
+                    android:textSize="10pt"
+                    android:layout_alignBottom="@+id/webView1"
+
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Anul producerii:"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/textView3"
+                    android:textSize="7pt" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text=""
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/getUserPass"
+                    android:textSize="7pt"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Producător:"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/textView8998"
+                    android:textSize="7pt" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text=""
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/ProducerView"
+                    android:textSize="7pt"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Adăugat:"
+                    android:id="@+id/textView89"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="12dp"
+                    android:textIsSelectable="false"
+                    android:textColor="#d2d2d2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text=""
+                    android:layout_marginLeft="10dp"
+                    android:textSize="12dp"
+                    android:textColor="#d2d2d2"
+                    android:id="@+id/addedAt"
+                    />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="300dp"
+
+                android:layout_gravity="center"
+
+                android:id="@+id/SingePrImage"
+                android:layout_height="250dp"
+
                 />
-            <TextView
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/getUserName"
-                 />
+                android:weightSum="1"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Descrierea:"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/textView4"
+                    android:textSize="7pt"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text=""
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/getUserID"
+                    android:textSize="7pt"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="1"
+                android:layout_marginTop="50dp"
+                android:textSize="7pt"
+                >
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:weightSum="1"
+                    >
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Apreciază"
+                        android:id="@+id/textView"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="9pt"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="50dp"
+                        android:weightSum="1"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="1"
+                            android:layout_marginLeft="0dp"
+                            android:id="@+id/Onestar"
+                            android:layout_marginTop="5dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="2"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/Twostars"
+                            android:layout_marginTop="5dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="3"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/ThreeStars"
+                            android:layout_marginTop="5dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="4"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/FourStars"
+                            android:layout_marginTop="5dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="5"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/FiveStars"
+                            android:layout_marginTop="5dp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Ai apreciat cu:"
+                        android:id="@+id/textView5"
+                        android:textSize="7pt"
+                        android:layout_marginLeft="20dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="92dp"
+                        android:id="@+id/totalRate"
+                        android:background="#fb6d6d"
+                        android:bottomRightRadius="7dp"
+                        android:typeface="normal"
+                        android:visibility="visible"
+                        android:width="19dp"
+                        android:paddingLeft="5dp"
+                        android:textSize="7pt"
+                        android:textIsSelectable="true"
+                        android:layout_marginBottom="5pt" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Voturi totale"
+                        android:id="@+id/textView67"
+                        android:textSize="5pt"
+                        android:layout_marginLeft="20dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:layout_marginLeft="131dp"
+                        android:id="@+id/totalVotes"
+                        android:background="#6dfb9f"
+                        android:bottomRightRadius="7dp"
+                        android:typeface="normal"
+                        android:visibility="visible"
+                        android:width="20dp"
+                        android:paddingLeft="5dp"
+                        android:textSize="7pt" />
+
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1"
-        >
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="description"
-                android:id="@+id/textView4"
-                android:layout_weight="0.08" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=""
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/getUserID"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="anul producerii"
-            android:id="@+id/textView3"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=""
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/getUserPass"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1"
-        >
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Producator:"
-            android:id="@+id/textView8998"
-            android:layout_weight="0.08" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=""
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/ProducerView"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:weightSum="1"
-    >
-
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="adaugat la:"
-        android:id="@+id/textView89"
-        android:layout_weight="0.08" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/addedAt"
-        />
-
-</LinearLayout>
 
 
-        <ImageView
-            android:layout_width="wrap_content"
 
-            android:layout_gravity="center"
-
-            android:id="@+id/SingePrImage"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_gravity="bottom"
 
-            />
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="1"
-        android:layout_marginTop="50dp"
-        >
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:weightSum="1"
-        >
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Rate this product!"
-            android:id="@+id/textView" />
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="50dp"
-            android:weightSum="1"
-            >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="1"
-            android:layout_marginLeft="0dp"
-            android:id="@+id/Onestar" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="2"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/Twostars" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="3"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/ThreeStars" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="4"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/FourStars" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="5"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/FiveStars" />
-
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/mainContainer"
+            android:layout_alignParentStart="true">
+            <fragment
+                android:id="@+id/mapView"
+                android:name="com.google.android.gms.maps.MapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
 
-    </LinearLayout>
-
-
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Product Rating"
-                android:id="@+id/textView5" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_gravity="right"
-                android:layout_marginLeft="100dp"
-                android:id="@+id/totalRate" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Total votes"
-                android:id="@+id/textView67" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_gravity="right"
-                android:layout_marginLeft="170dp"
-                android:id="@+id/totalVotes" />
-
-        </LinearLayout>
-        </LinearLayout>
-
-</LinearLayout>
-
-
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="bottom"
-
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/mainContainer"
-        android:layout_alignParentStart="true">
-        <fragment
-            android:id="@+id/mapView"
-            android:name="com.google.android.gms.maps.MapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
-
-
-</RelativeLayout>
+    </RelativeLayout>
 </ScrollView>
